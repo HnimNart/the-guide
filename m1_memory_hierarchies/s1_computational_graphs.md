@@ -365,7 +365,10 @@ test launch can create some issues when testing our GPU functions.
 ## 🧬3️⃣ Graphs in Graphics/GPU Programming
 Computational graphs are even making their way into the way you can program the GPU!
 Ways to define computational graphs have been added to
-[DirectX12](https://devblogs.microsoft.com/directx/d3d12-work-graphs-preview/)
-and [Vulkan](https://gpuopen.com/gpu-work-graphs-in-vulkan/).
+[DirectX12][0]
+and [Vulkan][1].
 This development seems to be lead by game and graphics workloads being increasingly
 compute shader driven.
+
+[0]: https://devblogs.microsoft.com/directx/d3d12-work-graphs-preview/
+[1]: https://gpuopen.com/gpu-work-graphs-in-vulkan/

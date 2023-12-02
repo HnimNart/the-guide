@@ -1,6 +1,6 @@
 # 👨🏼‍💻 Exercises
-## Pen & Paper Exercises
-### Vector Memory
+
+## m1::e0 - Vector Memory
 Write out the stack and heap memory of THIS sequence of vector operations.
 You can represent unitialized memory with a *.  
 The vector must double its capacity and copy over each element once it gets a push operation while at capacity.
@@ -34,14 +34,14 @@ Are you sure you got all of the undefined (*) values right?
 Which common operation could have replaced the last sequence of .pop() operations
 in the case where you wouldn't be using the popped values?
 
-### Linearized indexing  
+## m1::e1 - Linearized Indexing  
 You have an array of dimensions ```MN``` in a linearized array ```data```, write pseudo code that iterates
 through all data elements using two for-loops and doubles the value in place.
 
 You have an array of dimensions ```MNK``` in a linearized array ```data```, write pseudo code that iterates
 through all data elements using three for-loops and triples the value in place.
 
-### Killing the garbage collector
+## m1::e2 - Killing the Garbage Collector
 <figure markdown>
 ![Image](../figures/harass_the_garbage_collector.png){ width="500" }
 <figcaption>
@@ -63,12 +63,16 @@ How could you make this sort of general graph, with very few restrictions, safe 
 In the case of the multiply connected nodes, can you come up with a structural solution which allows
 us to make arbitrary graphs in a garbage collected setting or safe in a C++/Rust setting?
 
-## Programming
-Go to ```m1_memory_hierarchies::code::gpu_hand_in``` and follow the instructions.
-You need to do 3 different version of 1D convolution, a naive version, one with zero padding of the input
-signal and one with optimal usage of shared memory. For the second section you need to do a
-matrix multiplication and a tiled matrix multiplication (using shared memory). All on the GPU.
-
+## GPU Programming
 This serves as both one of the few instances where we can explicitly program parts of the memory hierarchy
 (shared memory resides in the L1 cache), but also as an introduction to parallel thinking, which you will
 need in the next module.
+
+### m1::e3 - 1D Convolution
+Go to ```m1_memory_hierarchies::code::gpu_hand_in``` and follow the instructions.
+You need to do 3 different version of 1D convolution, a naive version, one with zero padding of the input
+signal and one with optimal usage of shared memory.
+
+### m1::e4 - Matrix Multiplication
+For the second section you need to do a matrix multiplication and a tiled matrix multiplication
+(using shared memory). You should also try out doing a padded version.

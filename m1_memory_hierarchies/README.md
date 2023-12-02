@@ -175,4 +175,6 @@ all programs and it is worth spending some time on having at least a tenuous gra
 
 ## Additional Reading
 For a more in-depth explanation on the memory hierarchy see this chapter on
-[Memory Hierarchy Design](https://www.cs.umd.edu/~meesh/411/CA-online/chapter/memory-hierarchy-design-basics/index.html).
+[Memory Hierarchy Design][0].
+
+[0]: https://www.cs.umd.edu/~meesh/411/CA-online/chapter/memory-hierarchy-design-basics/index.html

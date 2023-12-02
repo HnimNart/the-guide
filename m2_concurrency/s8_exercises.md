@@ -1,4 +1,6 @@
 # 👨🏼‍💻 Exercises
+
+## m2::e0 - Archiectural Analysis
 Describe the base architecture of the egui-winit-wgpu template. Found in
 ```m2_concurrency::code::egui-winit-wgpu-template``` or
 [online][0].
@@ -8,7 +10,7 @@ Who owns what data?
 Think back to what you have learned in this and the previous module.  
 Use words and diagrams!  
 
-# 🧬 Descriptions
+# 🧬 m2::e1 - Interpretation
 Pick items worth a total of 3 points or more, write an interpretation of each
 item of at least 10 times the number of points lines. So an item worth 2 points
 requires a 20 line description.

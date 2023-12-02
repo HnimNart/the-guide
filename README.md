@@ -26,9 +26,9 @@ The material comprising the guide is divided into 7 modules.
 * Memory hierarchies and computational graphs
 * Concurrency
 * Types, energy usage, bit tricks and compression
+* How to create real time systems and additional components to use for your own projects
 * Optimization with an introduction to profiling
-* A random grab bag of tips and tricks, GUI and bindings
-* How to create real time systems and project proposals
+* Project ideas for trying out the various tools you have learned throughout the material
 
 So let's get started!
 

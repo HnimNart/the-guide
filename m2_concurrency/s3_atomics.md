@@ -120,9 +120,12 @@ about the differences in performance.
 
 ## Additional Reading
 If you would like to learn more about atomics I can recommend you read about atomics and reordering in the
-[Rustonomicon](https://doc.rust-lang.org/nomicon/atomics.html) or in the
-the atomics chapter in Jon Gjengset's book [Rust for Rustaceans](https://nostarch.com/rust-rustaceans)
+[Rustonomicon][0] or in the the atomics chapter in Jon Gjengset's book [Rust for Rustaceans][1]
 which is even better.
 
-To read more about lock-free algorithms, go [here](https://en.wikipedia.org/wiki/Non-blocking_algorithm),
-and [here](https://www.cs.cmu.edu/~410-s05/lectures/L31_LockFree.pdf).
+To read more about lock-free algorithms, go [here][2] and [here][3].
+
+[0]: https://doc.rust-lang.org/nomicon/atomics.html
+[1]: https://nostarch.com/rust-rustaceans
+[2]: https://en.wikipedia.org/wiki/Non-blocking_algorithm
+[3]: https://www.cs.cmu.edu/~410-s05/lectures/L31_LockFree.pdf

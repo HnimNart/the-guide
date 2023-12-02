@@ -98,8 +98,7 @@ Programs are just strings!
 We can decimate all of our neatly written shaders into something called op codes. You start by defining
 all of the data that goes in, you have a few lines of the thread figuring out its own ID and so on.
 Peruse the directory ```src::op_code_compiler::runner.rs``` or
-[online](https://github.com/absorensen/the-guide/blob/main/m1_memory_hierarchies/code/computational_graphs/src/op_code_compiler/runner.rs)
-. This is just a toy example, it didn't make
+[online][6]. This is just a toy example, it didn't make
 sense to make the whole thing and I won't be benchmarking it since the results will be the exact same
 as the operator version. Each op code is just a string. Each operator is just a list of op codes.
 In this op code example we do operator fusion by adding our ReLU op-code to the list.
@@ -137,9 +136,18 @@ at the top of the shader file and then compile. This makes your code less readab
 as fully using op codes.
 
 ## 5️⃣ Additional Reading
-[Fun and hackable tensors in Rust](https://getcode.substack.com/p/fun-and-hackable-tensors-in-rust)  
-[Massively Parallel Fun with GPUs](https://getcode.substack.com/p/massively-parallel-fun-with-gpus)  
-[Compute Shader Glossary](https://github.com/googlefonts/compute-shader-101/blob/main/docs/glossary.md)  
-[Torch.fx](https://pytorch.org/docs/stable/fx.html)  
-[torch.compile](https://pytorch.org/docs/stable/generated/torch.compile.html)  
-[Getting started with PyTorch's compiler](https://pytorch.org/docs/stable/torch.compiler.html)  
+
+* [Fun and hackable tensors in Rust][0]
+* [Massively Parallel Fun with GPUs][1]
+* [Compute Shader Glossary][2]
+* [Torch.fx][3]
+* [torch.compile][4]
+* [Getting started with PyTorch's compiler][5]
+
+[0]: https://getcode.substack.com/p/fun-and-hackable-tensors-in-rust
+[1]: https://getcode.substack.com/p/massively-parallel-fun-with-gpus
+[2]: https://github.com/googlefonts/compute-shader-101/blob/main/docs/glossary.md
+[3]: https://pytorch.org/docs/stable/fx.html
+[4]: https://pytorch.org/docs/stable/generated/torch.compile.html
+[5]: https://pytorch.org/docs/stable/torch.compiler.html
+[6]: https://github.com/absorensen/the-guide/blob/main/m1_memory_hierarchies/code/computational_graphs/src/op_code_compiler/runner.rs

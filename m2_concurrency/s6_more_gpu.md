@@ -148,5 +148,7 @@ scattering and gathering, there is a paper on it
 [from '07](https://cse.hkust.edu.hk/catalac/papers/scatter_sc07.pdf).
 
 ## Additional Reading
-To learn more about the graphics pipeline you can check out
-[Learn OpenGL](https://learnopengl.com/) or [Learn WGPU](https://sotrh.github.io/learn-wgpu/).
+To learn more about the graphics pipeline you can check out [Learn OpenGL][0] or [Learn WGPU][1].
+
+[0]: https://learnopengl.com/
+[1]: https://sotrh.github.io/learn-wgpu/

@@ -94,8 +94,11 @@ Why do you think that is?
 
 ## Additional Reading
 A longer, very friendly introduction to channels and message passing in Rust can be found
-[here](https://doc.rust-lang.org/book/ch16-02-message-passing.html).
+[here][0].
 
 This is slightly larger scale, but when running code on multiple compute nodes in an HPC installation,
 the most used method for sharing data between nodes is a standard called
-[MPI](https://en.wikipedia.org/wiki/Message_Passing_Interface).
+[MPI][1].
+
+[0]: https://doc.rust-lang.org/book/ch16-02-message-passing.html
+[1]: https://en.wikipedia.org/wiki/Message_Passing_Interface
