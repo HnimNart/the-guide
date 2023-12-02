@@ -145,21 +145,24 @@ pub fn create_bind_group(
         })
 }
 
-pub fn are_vectors_equivalent(a: &Vec<f32>, b: &Vec<f32>) -> bool {
-    let epsilon: f32 = 0.0001;
-
+pub fn compare_vectors(a: &Vec<f32>, b: &Vec<f32>) -> bool {
     for index in 0..a.len() {
-            if epsilon < (a[index] - b[index]).abs() {
-            println!("Error at index {}: Values are {} - {}", index, a[index], b[index]);
-            return false;
-} 
+        println!(
+            "Index {}: Values are {} - {}",
+            index, a[index], b[index]
+        );
     }
-
     true
 }
 
+pub fn are_vectors_equivalent_mse_scale(a: &Vec<f32>, b: &Vec<f32>, scale: f64) -> bool {
+    let epsilon: f64 = 0.01;
+    let mse = mean_square_error(a, b) / (scale as f64);
+    mse < epsilon
+}
+
 pub fn are_vectors_equivalent_mse(a: &Vec<f32>, b: &Vec<f32>) -> bool {
-    let epsilon: f64 = 0.00001;
+    let epsilon: f64 = 0.0001;
     let mse = mean_square_error(a, b);
     mse < epsilon
 }
@@ -169,10 +172,10 @@ pub fn mean_square_error(a: &Vec<f32>, b: &Vec<f32>) -> f64 {
 
     for index in 0..a.len() {
         let difference: f64 = a[index] as f64 - b[index] as f64;
-        result += (difference * difference) / a.len() as f64;
+        result += (difference * difference) as f64;
     }
 
-    result
+    result / a.len() as f64
 }
 
 // We create this struct to send global information (a uniform in graphics API parlance)
@@ -284,7 +287,7 @@ pub fn run_compute_shader(
         cpass.set_bind_group(0, &bind_group, &[]);
         cpass.insert_debug_marker("add_vectors");
         cpass.dispatch_workgroups(launch_blocks_x, launch_blocks_y, 1); // Number of cells to run, the (x,y,z) size of item being processed
-        // println!("Dispatching {} x blocks of {} threads and {} y blocks of {} threads each for a total of {} threads!", launch_blocks_x, _block_size_x, launch_blocks_y, _block_size_y, launch_blocks_x as usize * launch_blocks_y as usize * _block_size_x * _block_size_y);
+                                                                        // println!("Dispatching {} x blocks of {} threads and {} y blocks of {} threads each for a total of {} threads!", launch_blocks_x, _block_size_x, launch_blocks_y, _block_size_y, launch_blocks_x as usize * launch_blocks_y as usize * _block_size_x * _block_size_y);
     }
 
     // Add the command to the encoder copying output back to CPU

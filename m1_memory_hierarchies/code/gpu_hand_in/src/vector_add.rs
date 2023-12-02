@@ -1,5 +1,5 @@
 
-use crate::{utility::{GPUHandles, mean_square_error, are_vectors_equivalent, Uniform, run_compute_shader}, gpu_vector::GPUVector};
+use crate::{utility::{GPUHandles, mean_square_error, are_vectors_equivalent_mse, Uniform, run_compute_shader}, gpu_vector::GPUVector};
 
 fn vector_add_cpu(input_a: &Vec<f32>, input_b: &Vec<f32>) -> Vec<f32> {
     assert!(input_a.len() == input_b.len());
@@ -60,7 +60,7 @@ pub fn vector_add(handles: &GPUHandles) -> bool {
     );
 
     println!("vector_add MSE: {}", mean_square_error(&ground_truth, &output.cpu_data));
-    let success: bool = are_vectors_equivalent(&ground_truth, &output.cpu_data);
+    let success: bool = are_vectors_equivalent_mse(&ground_truth, &output.cpu_data);
     println!("vector_add success: {}!", success);
 
     success
