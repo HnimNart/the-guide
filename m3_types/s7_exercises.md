@@ -6,7 +6,7 @@ or you might be able to quantize data in order to compress it better, or even us
 hardware.
 
 ## Rounding Error Mitigation
-### Fused Multiply-Add
+### m3::e0 - Fused Multiply-Add
 In Rust, fused multiply-add is available directly on f32 types through [mul_add][0].
 
 ```rust
@@ -21,7 +21,7 @@ methods were. Remember that you might need to specify to a print statement more 
 
 Fused multiply-add is also available on the gpu. In WGSL, you can find it [here][1].
 
-### Summation
+### m3::e1 - Summation
 Let's take a look at compensating for errors in extremely large summations. To do this we need to have a ground
 truth result we can hold up the quality of our summation to. Let's use π and the [Madhava-Leibniz formula][3] to
 generate a series of numbers which should eventually approximate π.
@@ -47,7 +47,7 @@ way of summation on GPU's. If you want to get nuts, we can get nuts, you can als
 [iterative tree reduction][5] on the GPU.
 
 ## Sorting
-### Radix
+### m3::e3 - Radix
 Simply but [Radix][7] -, or bucket-, sorting numbers sorts them one digit at a time. Eventually, once all digits
 have been sorted, all of the numbers will be sorted. There are some very advanced, very parallelizable, versions
 of Radix sort, but try to do [a simple one][8].
@@ -61,7 +61,7 @@ Next generate a really big list of integers. Once the algorithm has executed and
 verify programmatically, that every element is equal to or bigger than its predecessor. Unless it is element 0,
 of course.
 
-### Morton
+### m3::e4 - Morton
 Morton coding not quite sorting, but we can generate a new number which gives better spatial coherence to data.
 Which can then be sorted by the [Morton code][9]. Briefly put, in the 2 dimensional case, we interleave the bits of
 two 4 bit numbers, ```x``` and ```y```, as ```y3x3y2x2y1x1y0x0```. This results in a z-order curve as described in
@@ -75,7 +75,7 @@ resolution in all dimensions, your input numbers cannot exceed 21-bits.
 
 Generating Morton codes as efficiently as possible also makes for an [interesting read][11].
 
-## Compression and Quantization
+## m3::e5 - Compression and Quantization
 Generate a list of points (```Vec3<f32>```). Make them big, don't just center them around 0 to 1. Start off with
 just a few numbers you verify yourself, but then generate a couple of million numbers. You can
 get the ```Vec3``` from libraries like [nalgebra][12] and [ultraviolet][13].

@@ -51,13 +51,17 @@ even 8-bit. Imagine many additional data elements you could fit in a single
 cache line. Elements which could be reused and kept in cache.
 
 ## Additional Reading
-[Efficient Processing of Deep Neural Networks](https://arxiv.org/pdf/1703.09039.pdf) is a highly
+[Efficient Processing of Deep Neural Networks][0] is a highly
 recommended tour through various concerns and techniques in reducing the energy footprint of
-neural networks.  
-[A recorded lecture of Vivienne Sze about energy efficiency in AI](https://www.youtube.com/watch?v=WbLQqPw_n88).  
-[Characterizing energy consumption of CPUs](https://ieeexplore.ieee.org/document/5598316).  
-[Green Computing](https://en.wikipedia.org/wiki/Green_computing).  
-[What is green coding?](https://geekflare.com/green-coding/).  
-The somewhat controversial paper
-[Ranking programming languages by energy efficiency](https://www.sciencedirect.com/science/article/pii/S0167642321000022)
-.
+neural networks. [A recorded lecture of Vivienne Sze about energy efficiency in AI][1] is also available.
+Other forays into energy efficiency includes [characterizing energy consumption of CPUs][2],
+[green Computing][3] and [what is green coding?][4]. The somewhat controversial paper -
+[Ranking programming languages by energy efficiency][5] compares different programming languages on the basis
+of energy consumption, speed and memory consumption.
+
+[0]: https://arxiv.org/pdf/1703.09039.pdf
+[1]: https://www.youtube.com/watch?v=WbLQqPw_n88
+[2]: https://ieeexplore.ieee.org/document/5598316
+[3]: https://en.wikipedia.org/wiki/Green_computing
+[4]: https://geekflare.com/green-coding/
+[5]: https://www.sciencedirect.com/science/article/pii/S0167642321000022

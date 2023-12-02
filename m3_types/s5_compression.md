@@ -177,13 +177,16 @@ And here we are. This was a small example of how domain knowledge can help you c
 aren't writing the compressor yourself.
 
 ## Additional Reading
-[Information Theory](https://en.wikipedia.org/wiki/Information_theory)  
-[Data Compression](https://en.wikipedia.org/wiki/Data_compression)  
-[Lempel-Ziv 77 & 78](https://en.wikipedia.org/wiki/LZ77_and_LZ78)  
-[Huffman Coding](https://en.wikipedia.org/wiki/Huffman_coding)  
+[Data Compression][1] has its basis in [information theory][0]. The two seminal basis algorithms are
+[Lempel-Ziv 77 & 78][2] and [Huffman coding][3]. [Zip][4] is universally used and is natively supported in most
+browsers through Gzip for [HTTP compression][5].
 
-[Zip](https://en.wikipedia.org/wiki/ZIP_(file_format))  
-Gzip - [HTTP Compression](https://en.wikipedia.org/wiki/HTTP_compression)  
+Lots of interesting things are happening in real-time decompression [using neural networks][6].
 
-Lots of interesting things are happening in real-time decompression
-[using neural networks](https://research.nvidia.com/labs/rtr/neural_texture_compression/).
+[0]: https://en.wikipedia.org/wiki/Information_theory
+[1]: https://en.wikipedia.org/wiki/Data_compression
+[2]: https://en.wikipedia.org/wiki/LZ77_and_LZ78
+[3]: https://en.wikipedia.org/wiki/Huffman_coding
+[4]: https://en.wikipedia.org/wiki/ZIP_(file_format)
+[5]: https://en.wikipedia.org/wiki/HTTP_compression
+[6]: https://research.nvidia.com/labs/rtr/neural_texture_compression/

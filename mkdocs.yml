@@ -93,11 +93,9 @@ nav:
     - S3 - Atomics: m2_concurrency/s3_atomics.md
     - S4 - Message Passing: m2_concurrency/s4_message_passing.md
     - S5 - Async: m2_concurrency/s5_async.md
-    - S6 - Events: m2_concurrency/s6_events.md
-    - S7 - 3️⃣ More GPU: m2_concurrency/s7_more_gpu.md
-    - S8 - 3️⃣ Branchless Programming: m2_concurrency/s8_branchless_programming.md
-    - S9 - 3️⃣ Parallel Graphs: m2_concurrency/s9_parallel_graphs.md
-    - S10 - 👨🏼‍💻 Exercises: m2_concurrency/s10_exercises.md
+    - S6 - 3️⃣ More GPU: m2_concurrency/s6_more_gpu.md
+    - S7 - 3️⃣ Parallel Graphs: m2_concurrency/s7_parallel_graphs.md
+    - S8 - 👨🏼‍💻 Exercises: m2_concurrency/s8_exercises.md
   - M3 - Types:
     - m3_types/README.md
     - S0 - Integers: m3_types/s0_integers.md
@@ -108,16 +106,22 @@ nav:
     - S5 - 3️⃣ Compression: m3_types/s5_compression.md
     - S6 - 🧬3️⃣ Cooperative Matrices: m3_types/s6_cooperative_matrices.md
     - S7 - 👨🏼‍💻 Exercises: m3_types/s7_exercises.md
-  - M4 - 3️⃣ Optimization:
-    - m4_optimization/README.md
-    - S0 - Timing and Printing: m4_optimization/s0_timing_and_printing.md
-    - S1 - Profilers: m4_optimization/s1_profilers.md
-    - S2 - 🧬3️⃣ Optimizing Deep Learning Training: m4_optimization/s2_optimizing_deep_learning_training.md
-    - S3 - 👨🏼‍💻 Exercises: m4_optimization/s3_exercises.md
-  - M5 - 3️⃣ Real-Time Systems:
-    - m5_real_time_systems/README.md
-    - SX - Tips and Tricks: m5_real_time_systems/sx_tips_and_tricks.md
-    - S3 - 👨🏼‍💻 Exercises: m5_real_time_systems/s3_exercises.md
+  - M4 - 3️⃣ Real-Time Systems:
+    - m4_real_time_systems/README.md
+    - S0 - Events and Interactions: m4_real_time_systems/s0_events_and_interactions.md
+    - S1 - Graphical User Interfaces: m4_real_time_systems/s1_graphical_user_interfaces.md
+    - S2 - Architecture and Design: m4_real_time_systems/s2_architecture_and_design.md
+    - S3 - Branchless Programming: m4_real_time_systems/s3_branchless_programming.md
+    - S4 - Logging: m4_real_time_systems/s4_logging.md
+    - S5 - Bindings: m4_real_time_systems/s5_bindings.md
+    - S6 - Tips and Tricks: m4_real_time_systems/s6_tips_and_tricks.md
+    - S7 - 👨🏼‍💻 Exercises: m4_real_time_systems/s7_exercises.md
+  - M5 - 3️⃣ Optimization:
+    - m5_optimization/README.md
+    - S0 - Timing and Printing: m5_optimization/s0_timing_and_printing.md
+    - S1 - Profilers: m5_optimization/s1_profilers.md
+    - S2 - 🧬3️⃣ Optimizing Deep Learning Training: m5_optimization/s2_optimizing_deep_learning_training.md
+    - S3 - 👨🏼‍💻 Exercises: m5_optimization/s3_exercises.md
   - M6 - 👨🏼‍💻🧬 Projects:
     - m6_projects/README.md
     - S0 - Project Ideas: m6_projects/s0_project_ideas.md

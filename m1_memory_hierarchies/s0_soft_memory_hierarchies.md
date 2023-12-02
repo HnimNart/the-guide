@@ -1730,32 +1730,40 @@ and renders the entire scene. This also allows for rendering of scenes which are
 even main memory.
 
 ## Additional Reading
-An explanation of memory allocation, stack and heap
-[in C](https://cs2461-2020.github.io/lectures/dynamic.pdf).
+An explanation of memory allocation, stack and heap [in C][0].
 
-A more rigorous [explanation](http://eceweb.ucsd.edu/~gert/ece30/CN5.pdf)
-of the register, cache, main memory and virtual memory parts of the memory hierarchy.
-For even more [virtual memory](http://csapp.cs.cmu.edu/2e/ch9-preview.pdf).
+A more rigorous [explanation][1] of the register, cache, main memory and virtual memory parts of
+the memory hierarchy. For even more [virtual memory][2].
 
-Check out the memory and cache specs for Apple's [M1 series](https://en.wikipedia.org/wiki/Apple_M1).
+Check out the memory and cache specs for Apple's [M1 series][3].
 
-For an example of coding a [tri-color marking garbage collector](https://sean.cm/a/tricolor-garbage-collector).
+For an example of coding a [tri-color marking garbage collector][4].
 
 For more about
-[garbage collection in Python](https://devguide.python.org/internals/garbage-collector/),
-[more basic garbage collection in Pyton](https://stackify.com/python-garbage-collection/) or
-[garbage collection in Java](https://blogs.oracle.com/javamagazine/post/understanding-garbage-collectors).
+[garbage collection in Python][5], [more basic garbage collection in Pyton][6] or [garbage collection in Java][7].
 
-For more on implementing a [heap with an array](https://www.programiz.com/dsa/heap-data-structure),
-[priority queues](https://www.programiz.com/dsa/priority-queue),
-[binary trees](https://www.programiz.com/dsa/binary-tree),
-[binary trees using arrays in Python](https://programmingoneonone.com/array-representation-of-binary-tree.html).
-These pages have implementation details in C/C++/Python.
+For more on implementing a [heap with an array][8], [priority queues][9], [binary trees][10],
+[binary trees using arrays in Python][11]. These pages have implementation details in C/C++/Python.
 
 If you are into spatial data structures and/or graphics, computer vision, etc here's some links for
-[octrees](https://www.gamedev.net/articles/programming/general-and-gameplay-programming/introduction-to-octrees-r3529/),
-[BVHs](https://pbr-book.org/3ed-2018/Primitives_and_Intersection_Acceleration/Bounding_Volume_Hierarchies),
-[Kd-Trees](https://pbr-book.org/3ed-2018/Primitives_and_Intersection_Acceleration/Kd-Tree_Accelerator),
-[a comparison between kD tree and octree](https://doc.cgal.org/latest/Orthtree/index.html),
-[levels-of-detail for point clouds (chapter 3)](https://publik.tuwien.ac.at/files/publik_252607.pdf)
-and [levels-of-detail for meshes](https://www.evl.uic.edu/vchand2/thesis/papers/Marching%20Cubes.pdf).
+[octrees][12], [BVHs][13], [Kd-Trees][14], [a comparison between kD tree and octree][15],
+[levels-of-detail for point clouds (chapter 3)][16] and [levels-of-detail for meshes][17].
+
+[0]: https://cs2461-2020.github.io/lectures/dynamic.pdf
+[1]: http://eceweb.ucsd.edu/~gert/ece30/CN5.pdf
+[2]: http://csapp.cs.cmu.edu/2e/ch9-preview.pdf
+[3]: https://en.wikipedia.org/wiki/Apple_M1
+[4]: https://sean.cm/a/tricolor-garbage-collector
+[5]: https://devguide.python.org/internals/garbage-collector/
+[6]: https://stackify.com/python-garbage-collection/
+[7]: https://blogs.oracle.com/javamagazine/post/understanding-garbage-collectors
+[8]: https://www.programiz.com/dsa/heap-data-structure
+[9]: https://www.programiz.com/dsa/priority-queue
+[10]: https://www.programiz.com/dsa/binary-tree
+[11]: https://programmingoneonone.com/array-representation-of-binary-tree.html
+[12]: https://www.gamedev.net/articles/programming/general-and-gameplay-programming/introduction-to-octrees-r3529/
+[13]: https://pbr-book.org/3ed-2018/Primitives_and_Intersection_Acceleration/Bounding_Volume_Hierarchies
+[14]: https://pbr-book.org/3ed-2018/Primitives_and_Intersection_Acceleration/Kd-Tree_Accelerator
+[15]: https://doc.cgal.org/latest/Orthtree/index.html
+[16]: https://publik.tuwien.ac.at/files/publik_252607.pdf
+[17]: https://www.evl.uic.edu/vchand2/thesis/papers/Marching%20Cubes.pdf

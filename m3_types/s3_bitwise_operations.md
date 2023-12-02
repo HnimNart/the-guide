@@ -101,7 +101,7 @@ from 0 to 1 or from 1 to 0.
 # 3️⃣ Bitwise Rust
 Rust does not have a bit vector implementation in the standard library, but what it does instead is implement
 quite a number of bitwise or bitwise-adjacent operations directly on
-[integers](https://doc.rust-lang.org/std/primitive.u32.html#method.rotate_left).
+[integers][0].
 Rust does have the bitwise NOT, usually denoted ~, but it is ! like on boolean types. Like so -
 
 ```rust
@@ -110,5 +110,9 @@ let flipped_value: u8 = !initial_value; // 0b10101010;
 ```
 
 ## Additional Reading
-[Bitwise Operations wiki](https://en.wikipedia.org/wiki/Bitwise_operation).  
-The Rust language reference for [operators](https://doc.rust-lang.org/reference/expressions/operator-expr.html).
+If you want to go into greater depths about bitwise operators check out [this wiki][1] or the Rust language
+reference for [operators][2].
+
+[0]: https://doc.rust-lang.org/std/primitive.u32.html#method.rotate_left
+[1]: https://en.wikipedia.org/wiki/Bitwise_operation
+[2]: https://doc.rust-lang.org/reference/expressions/operator-expr.html

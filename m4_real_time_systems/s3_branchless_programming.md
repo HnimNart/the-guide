@@ -1,9 +1,11 @@
 # 3️⃣ Branchless Programming
 For this next section, I am going to be cheating a little bit.
 I am going to introduce to you a concept that is mostly about optimizing for branch prediction and cache lines.
-These things aren't technically concurrency. But they do lead to an introduction of single instruction,
-multiple data (SIMD), which is... I don't know... concurrency's cousin or something. It also wasn't immediately
-obvious where else this would go. Anyways, branch prediction, branchless programming, data oriented programming and
+These things are somewhere between concurrency, memory optimization and real-time systems.
+They do lead to an introduction of single instruction, multiple data (SIMD), which is... I don't know...
+concurrency's cousin or something. Factoring your code in a way that leads you to get good performance out of
+SIMD. This is not just about writing a function a certain way, but about how you structure your data, your code
+and your architecture. Anyways, branch prediction, branchless programming, data oriented programming and
 SIMD, here we go!
 
 ## Branch Prediction
@@ -48,8 +50,7 @@ Image credit </a>
 </figcaption>
 </figure>
 
-If you would like to know more about the hardware side, I do recommend you check out these
-[slides](https://ics.uci.edu/~swjun/courses/2023F-CS250P/materials/lec5.5%20-%20Fast%20and%20Correct%20Pipelining.pdf)
+If you would like to know more about the hardware side, I do recommend you check out these [slides][0]
 from University of California, Irvine for a cursory glance at the fairly complex topic of the hardware involved in
 branch prediction.  
 
@@ -59,8 +60,7 @@ B would be executed. In a few cases path A will be executed instead, but will be
 ## Branchless Programming
 "Branchless programming", is perhaps too big a promise, in all but the simplest cases, it will be
 "branch mitigating programming". Branching in code is expensive, so let's look at how we can help the computer,
-regardless of parallelism, attain a bit of speed. Again, please checkout the
-[slides](https://ics.uci.edu/~swjun/courses/2023F-CS250P/materials/lec5.5%20-%20Fast%20and%20Correct%20Pipelining.pdf)
+regardless of parallelism, attain a bit of speed. Again, please checkout the [slides][0]
 for an overview of various hazards with code examples. But a few of the basic highlights are control flow, through
 short circuiting, unrolling of for-loops (your compiler will often do this automatically), reformulation of
 branching through arithmetic. Another problem can be data hazards. If line A is writing to some variable in an
@@ -376,24 +376,29 @@ significantly worse on other systems though.,
 
 I will leave you with one thing if you are memory bound, SIMD won't magically make your memory bandwidth increase.  
 
-Also, here's [a nice blog post](https://www.rustsim.org/blog/2020/03/23/simd-aosoa-in-nalgebra/) about
-the performance implications of AOS, SOA and AOSOA.
+Also, here's [a nice blog post][2] about the performance implications of AOS, SOA and AOSOA.
 
 ## Additional Reading
-A nice introduction video to [branchless programming](https://www.youtube.com/watch?v=g-WPhYREFjk) by Fedor Pikus.  
-A nice introduction video to [SIMD](https://www.youtube.com/watch?v=x5tK5ET6Q1I) by Guillaume Endignoux.  
-Mike Acton on [Data-oriented Design](https://www.youtube.com/watch?v=rX0ItVEVjHc).  
-Wiki on [branch prediction](https://en.wikipedia.org/wiki/Branch_predictor).  
-Wiki on [instruction pipelining](https://en.wikipedia.org/wiki/Instruction_pipelining).  
-Slides on [instruction pipelining](https://web.eecs.utk.edu/~mbeck/classes/cs160/lectures/09_intruc_pipelining.pdf)
-from The University of Tennessee, Knoxville.  
+To learn more about instruction pipelining, here is a [wiki][7] and some [slides][8]. Also, there's a
+wiki on [branch prediction][6].
+
+For the broader view there's a nice introduction video to [branchless programming][3] by Fedor Pikus,  
+an introduction video to [SIMD][4] by Guillaume Endignoux and a talk by Mike Acton on [data-oriented design][5].  
 
 ### 🧬 Shader Execution Reordering
 The sorting, compacting and reordering hinted at for path tracing earlier is actually a pretty hot button topic
-in path tracing and has recently gotten hardware support.  
+in path tracing and has recently gotten hardware support. The seminal paper [Megakernels Considered Harmful][9]
+is worth a read. You can also find a more practical blog post [blog post][10] about it thanks to Jacco Bikker.
+This is even being rolled out and described in this [blog post by Nvidia][1].  
 
-[Megakernels Considered Harmful](https://research.nvidia.com/sites/default/files/publications/laine2013hpg_paper.pdf)  
-[Wavefront Path Tracing](https://jacco.ompf2.com/2019/07/18/wavefront-path-tracing/)  
-[Shader Execution Reordering][1]  
-
+[0]: https://ics.uci.edu/~swjun/courses/2023F-CS250P/materials/lec5.5%20-%20Fast%20and%20Correct%20Pipelining.pdf
 [1]: https://developer.nvidia.com/blog/improve-shader-performance-and-in-game-frame-rates-with-shader-execution-reordering/  
+[2]: https://www.rustsim.org/blog/2020/03/23/simd-aosoa-in-nalgebra/
+[3]: https://www.youtube.com/watch?v=g-WPhYREFjk
+[4]: https://www.youtube.com/watch?v=x5tK5ET6Q1I
+[5]: https://www.youtube.com/watch?v=rX0ItVEVjHc
+[6]: https://en.wikipedia.org/wiki/Branch_predictor
+[7]: https://en.wikipedia.org/wiki/Instruction_pipelining
+[8]: https://web.eecs.utk.edu/~mbeck/classes/cs160/lectures/09_intruc_pipelining.pdf
+[9]: https://research.nvidia.com/sites/default/files/publications/laine2013hpg_paper.pdf
+[10]: https://jacco.ompf2.com/2019/07/18/wavefront-path-tracing/

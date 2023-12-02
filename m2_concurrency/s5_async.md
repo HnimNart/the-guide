@@ -72,15 +72,20 @@ or very soon all of your code, including your main, will be async.
 
 ## Additional Reading
 For an intro to the async functionality available in the core Rust library, there's a
-[book for that](https://rust-lang.github.io/async-book/).
+[book for that][0].
 
-[Tokio](https://tokio.rs/) is a widely used async runtime. It is suggested, by Tokio itself, to not use it for cases
+[Tokio][1] is a widely used async runtime. It is suggested, by Tokio itself, to not use it for cases
 where you are CPU compute bound, they suggest Rayon in that case, to not use it for accessing lots of files as the
 operating systems generally do not have asynchronous file APIs, and to not use it for single web requests. So, when
 thinking about stuff like web servers, or something else making lots of web requests, Tokio might be the right tool.
 
-[async-std](https://async.rs/) is a newer library which seeks to act as an async extension of Rust. It is also
+[async-std][2] is a newer library which seeks to act as an async extension of Rust. It is also
 mostly interesting if you need to handle lots of networking.
 
-[Green Threads](https://en.wikipedia.org/wiki/Green_thread) are like virtualized threads, like threads emulated in
+[Green Threads][3] are like virtualized threads, like threads emulated in
 software, to make them extremely lightweight.
+
+[0]: https://rust-lang.github.io/async-book/
+[1]: https://tokio.rs/
+[2]: https://async.rs/
+[3]: https://en.wikipedia.org/wiki/Green_thread

@@ -171,9 +171,9 @@ let bits_of_precision: u32 = 10;
 let mut encoded: u32 = 0;
 let mut mask: u32 = 1;
 for index in 0..bits_of_precision {
-    encoded |= ((x & (1 << index)) << 2*index);
-    encoded |= ((y & (1 << index)) << (2*index + 1));
-    encoded |= ((z & (1 << index)) << (2*index + 2));
+    encoded |= ((x & (mask << index)) <<  component_count * index);
+    encoded |= ((y & (mask << index)) << (component_count * index + 1));
+    encoded |= ((z & (mask << index)) << (component_count * index + 2));
 }
 
 ```
@@ -262,8 +262,9 @@ I watched [this video](https://www.youtube.com/watch?v=p8u_k2LIZyo) about it som
 remember how it works. It casts the float to an integer (long), and then manipulates the underlying bits through
 knowledge of the mantissa. It casts it back to a float, and then uses a single iteration of Newton's method for
 reducing the error. If you read the rest of the wiki, you will see there have been subsequent improvements to
-the accuracy, elimination of undefined behavior. The algorithm resulted in a four times faster execution
-than just getting the square root directly. Short after, hardware implementations started cropping up which
+the accuracy, elimination of undefined behavior, and so on. The algorithm resulted in a four times faster execution
+than just calling the square root directly and dividing.
+Short after, hardware implementations started cropping up which
 outperformed it both in performance and in accuracy. You can even find it in WGSL through calling
 ```inverseSqrt(data)```.
 
@@ -274,4 +275,6 @@ by a large margin, if the hardware support is available.
 
 ## Additional Reading
 If you've read all of this, you should now be ready to look at quantization and quantization aware training
-[in PyTorch](https://pytorch.org/blog/introduction-to-quantization-on-pytorch/).
+[in PyTorch][0].
+
+[0]: https://pytorch.org/blog/introduction-to-quantization-on-pytorch/

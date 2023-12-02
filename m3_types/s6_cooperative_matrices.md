@@ -25,9 +25,7 @@ Image credit </a>
 While the tensor cores support matrix-matrix multiplication, they are much more limited in the size of the
 multiplication. For a general linear operation, you might need to still uses loops, but you would then
 be tiling your matrix instead, sending a 4x4 tile at a time of your matrices and keep track of your precisions,
-such as accumulating in a higher level of precision. You can read more about it
-[here](https://developer.nvidia.com/blog/programming-tensor-cores-cuda-9/) and for Vulkan
-[here](https://developer.nvidia.com/blog/machine-learning-acceleration-vulkan-cooperative-matrices/).
+such as accumulating in a higher level of precision. You can read more about it [here][0] and for Vulkan [here][1].
 
 If you keep the calculations numerically stable you can even keep all of your weights during the training of
 a neural network in 8-bit floating point, while accumulating in 16-bit floating point or greater,
@@ -47,13 +45,16 @@ Image credit </a>
 </figure>
 
 ## Additional Reading
-[Tensor Cores](https://www.nvidia.com/en-us/data-center/tensor-cores/)  
-[Programming Tensor Cores](https://developer.nvidia.com/blog/programming-tensor-cores-cuda-9/)  
-Vulkan
-[Cooperative Matrix](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_NV_cooperative_matrix.html)  
-Machine Learning
-[in Vulkan](https://developer.nvidia.com/blog/machine-learning-acceleration-vulkan-cooperative-matrices/)  
-Accelerating Inference
-[with Sparsity](https://developer.nvidia.com/blog/accelerating-inference-with-sparsity-using-ampere-and-tensorrt/)  
-A series of videos regarding how to use tensor cores for [mixed precision training](https://developer.nvidia.com/blog/video-mixed-precision-techniques-tensor-cores-deep-learning/)
-.
+You can check out some material on [tensor cores][2] and [programming tensor cores][3] in CUDA. Or you
+can check out [cooperative matrices][4] and [machine learning][5] in Vulkan. There's also some material on  
+Accelerating inference [with sparsity][6] and a series of videos regarding how to use tensor cores for
+[mixed precision training][7].
+
+[0]: https://developer.nvidia.com/blog/programming-tensor-cores-cuda-9/
+[1]: https://developer.nvidia.com/blog/machine-learning-acceleration-vulkan-cooperative-matrices/
+[2]: https://www.nvidia.com/en-us/data-center/tensor-cores/
+[3]: https://developer.nvidia.com/blog/programming-tensor-cores-cuda-9/
+[4]: https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_NV_cooperative_matrix.html
+[5]: https://developer.nvidia.com/blog/machine-learning-acceleration-vulkan-cooperative-matrices/
+[6]: https://developer.nvidia.com/blog/accelerating-inference-with-sparsity-using-ampere-and-tensorrt/
+[7]: https://developer.nvidia.com/blog/video-mixed-precision-techniques-tensor-cores-deep-learning/

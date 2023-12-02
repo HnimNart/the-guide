@@ -34,7 +34,7 @@ get slower with new commits. Creating benchmarks for individual functions can ta
 a bit more work as you also have to generate some test cases to use as input.
 
 Depending on what system you are on, you can have easy access to programs like
-[perf](https://en.wikipedia.org/wiki/Perf_(Linux)), which is available on Linux.
+[perf][0], which is available on Linux.
 This command line tool allows you to run your full program and can output performance
 statistics like which functions are the "hottest", as in, in which functions does your
 program spend the most amount of time. To get meaningful output in situations like these
@@ -62,5 +62,10 @@ that is in your browser for web programming, or the profiler that is provided wi
 deep learning frameworks such as PyTorch.
 
 ## Additional Reading
-[Full-Stack, GPU-based Acceleration of Deep Learning](https://nvlabs.github.io/EfficientDL/)  
-[Writing Performant Concurrent Data Structures](https://www.youtube.com/watch?v=XKODaZgKcnE)  
+For some step-by-step introductions to optimization check out [this series of videos][1] about
+optimizing the performance of machine learning code or [this video][2] about writing performant concurrent
+data structures.
+
+[0]: https://en.wikipedia.org/wiki/Perf_(Linux)
+[1]: https://nvlabs.github.io/EfficientDL/
+[2]: https://www.youtube.com/watch?v=XKODaZgKcnE

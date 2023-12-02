@@ -546,19 +546,19 @@ but you can see the primitives for declaring shared memory, accessing it and syn
 Now back to the memory hierarchies!
 
 ## Additional Reading
-[The GPU Memory Hierarchy](https://www.cs.cmu.edu/afs/cs/academic/class/15869-f11/www/lectures/08_mem_hierarchy.pdf),
-[GPU Memory Hierarchy](http://meseec.ce.rit.edu/551-projects/spring2015/3-2.pdf),
-[GPU Programming](http://dlsys.cs.washington.edu/pdf/lecture5.pdf),
-[Hopper Architecture In-Depth](https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/)
-and [GPU architecture and CUDA Programming](https://gfxcourses.stanford.edu/cs149/fall22/lecture/gpuarch/).
-The last entry is highly recommended.
+To learn more about GPU's and memory checkout these - [The GPU Memory Hierarchy][0],
+[GPU Memory Hierarchy][1], [GPU Programming][2], [Hopper Architecture In-Depth][3] and
+[GPU architecture and CUDA Programming][4]. The last entry is highly recommended.
 
-A slightly more detailed explanation of
-[asynchronous memory transfers](https://engineering.purdue.edu/~smidkiff/ece563/NVidiaGPUTeachingToolkit/Mod14DataXfer/Mod14DataXfer.pdf)
-for GPUs.
+To learn more about [optimzing shaders with shared memory][7]. A slightly more detailed explanation of
+[asynchronous memory transfers][5] for GPUs. If you want to learn more about wgpu, this is the most
+used tutorial is [Learn Wgpu][6].
 
-If you want to learn more about wgpu, this is the most used tutorial -
-[Learn Wgpu](https://sotrh.github.io/learn-wgpu/).
-
-To learn more about
-[optimzing shaders with shared memory](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#shared-memory).
+[0]: https://www.cs.cmu.edu/afs/cs/academic/class/15869-f11/www/lectures/08_mem_hierarchy.pdf
+[1]: http://meseec.ce.rit.edu/551-projects/spring2015/3-2.pdf
+[2]: http://dlsys.cs.washington.edu/pdf/lecture5.pdf
+[3]: https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/
+[4]: https://gfxcourses.stanford.edu/cs149/fall22/lecture/gpuarch/
+[5]: https://engineering.purdue.edu/~smidkiff/ece563/NVidiaGPUTeachingToolkit/Mod14DataXfer/Mod14DataXfer.pdf
+[6]: https://sotrh.github.io/learn-wgpu/
+[7]: https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#shared-memory

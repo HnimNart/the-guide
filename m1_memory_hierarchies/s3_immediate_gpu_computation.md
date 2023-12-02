@@ -26,12 +26,7 @@ a bit like what is described in the 3️⃣ section of m1::s2.
 
 There are three central files for this. ```src::shared::tensor2d_gpu.rs```,
 ```src::shared::shaders::linear_layer.wgsl``` and ```src::immediate::nodes.rs```.
-If you don't have them locally you can them
-[here](https://github.com/absorensen/the-guide/blob/main/m1_memory_hierarchies/code/computational_graphs/src/shared/tensor2d_gpu.rs),
-[here](https://github.com/absorensen/the-guide/blob/main/m1_memory_hierarchies/code/computational_graphs/src/shared/shaders/linear_layer.wgsl)
-and
-[here](https://github.com/absorensen/the-guide/blob/main/m1_memory_hierarchies/code/computational_graphs/src/immediate/nodes.rs)
-respectively.
+If you don't have them locally you can them [here][0], [here][1] and [here][2] respectively.
 
 First of all, let's go directly to the shader (GPU) code in ```linear_layer.wgsl```.
 The version of the two functions we are interested in is ```main```.
@@ -100,10 +95,7 @@ of the real use case. Just know that immediate mode is highly suboptimal.
 ## Building ReLU
 We then implement ReLU, Softmax and the fused operators in the same way.
 ReLU you can just check out yourself in ```shaders::relu.wgsl``` or
-[online](https://github.com/absorensen/the-guide/blob/main/m1_memory_hierarchies/code/computational_graphs/src/shared/shaders/relu.wgsl)
-along with an inline implementation in ```shaders::relu_inline.wgsl``` or
-[here](https://github.com/absorensen/the-guide/blob/main/m1_memory_hierarchies/code/computational_graphs/src/shared/shaders/relu_inline.wgsl)
-.
+[online][3] along with an inline implementation in ```shaders::relu_inline.wgsl``` or [here][4].
 
 <figure markdown>
 ![Image](../figures/relu_gpu_immediate.png){ width="800" }
@@ -119,9 +111,8 @@ version.
 
 ## Building Softmax
 Next up, we have the softmax operator. You will find the three shaders
-needed for the softmax operator in ```shaders::softmax.wgsl``` or
-[online](https://github.com/absorensen/the-guide/blob/main/m1_memory_hierarchies/code/computational_graphs/src/shared/shaders/softmax.wgsl)
-.
+needed for the softmax operator in ```shaders::softmax.wgsl``` or [online][5].
+
 In this case, finding and communicating the maximum value and
 the sum is a lot more complicated on a GPU. The implementation
 provided is not even using all the possible threads, but just a
@@ -174,3 +165,10 @@ implementations, but it has been left as an optional 4️⃣ exercise for you to
 this for immediate mode operations. This works just fine when you have 4-10 shaders to
 compile and keep track of, but what if you had in the 1000's of combinations? In that
 case you might need some form of cache eviction mechanism, such as LRU.
+
+[0]: https://github.com/absorensen/the-guide/blob/main/m1_memory_hierarchies/code/computational_graphs/src/shared/tensor2d_gpu.rs
+[1]: https://github.com/absorensen/the-guide/blob/main/m1_memory_hierarchies/code/computational_graphs/src/shared/shaders/linear_layer.wgsl
+[2]: https://github.com/absorensen/the-guide/blob/main/m1_memory_hierarchies/code/computational_graphs/src/immediate/nodes.rs
+[3]: https://github.com/absorensen/the-guide/blob/main/m1_memory_hierarchies/code/computational_graphs/src/shared/shaders/relu.wgsl
+[4]: https://github.com/absorensen/the-guide/blob/main/m1_memory_hierarchies/code/computational_graphs/src/shared/shaders/relu_inline.wgsl
+[5]: https://github.com/absorensen/the-guide/blob/main/m1_memory_hierarchies/code/computational_graphs/src/shared/shaders/softmax.wgsl

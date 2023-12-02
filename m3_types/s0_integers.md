@@ -144,14 +144,18 @@ This is bad, and you shouldn't do it.
 Signed integers are a bit more complex. They can carry both positive and negative numbers.
 The outermost bit is reserved as a sign bit, denoting whether the number is positive or
 negative. Read about the range of signed integers as well as the concept two's complement
-[here](https://en.wikipedia.org/wiki/Two%27s_complement).
+[here][0].
 
 In the case of signed integers, over- and underflow are undefined in general. However,
-overflow for signed integers is
-[defined in Rust Debug](https://doc.rust-lang.org/book/ch03-02-data-types.html#integer-overflow)
-. You can se more about the types [in Rust here.](https://doc.rust-lang.org/reference/types/numeric.html)
+overflow for signed integers is [defined in Rust Debug][1]. You can se more about the types in Rust [here][2].
 
 ## Additional Reading
-You can take a look at the wiki for [integers](https://en.wikipedia.org/wiki/Integer_(computer_science)),
-or you might prefer [lecture slides](https://www.cs.utexas.edu/users/witchel/429H/lectures/02-bits-ints.pdf)
-or even a video by your favourite [performance YouTuber](https://www.youtube.com/watch?v=fYMeYrIWnOc).
+You can take a look at the wiki for [integers][3], or you might prefer [lecture slides][4]
+or even a video by your favourite [performance YouTuber][5].
+
+[0]: https://en.wikipedia.org/wiki/Two%27s_complement
+[1]: https://doc.rust-lang.org/book/ch03-02-data-types.html#integer-overflow
+[2]: https://doc.rust-lang.org/reference/types/numeric.html
+[3]: https://en.wikipedia.org/wiki/Integer_(computer_science)
+[4]: https://www.cs.utexas.edu/users/witchel/429H/lectures/02-bits-ints.pdf
+[5]: https://www.youtube.com/watch?v=fYMeYrIWnOc

@@ -2,7 +2,7 @@
 Try out the profilers relevant to your own system with some sample programs.  
 Now try it with some of your own code from before you started on the guide!
 
-## Setting Up a Profiler
+## m5::e0 - Setting Up a Profiler
 Find and setup a profiler that works on your system.
 Find some Rust code that uses the GPU and run it.
 If you don't have any code relevant to the kind of projects you do normally, for GPU code you can try out
