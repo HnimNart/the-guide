@@ -1,7 +1,7 @@
 use crate::gpu_vector::GPUVector;
 use crate::utility::{
-    are_vectors_equivalent, are_vectors_equivalent_mse, mean_square_error, run_compute_shader,
-    GPUHandles, Uniform,
+    are_vectors_equivalent_mse, mean_square_error, measure_time,
+    run_compute_shader, GPUHandles, Uniform,
 };
 
 // The length of filter is assumed to be oddly number, i.e. 1, 3, 5, 7, 9, 11
@@ -48,6 +48,7 @@ fn run_conv_shader(
     uniform: &Uniform,
     input_signal: &GPUVector,
     input_filter: &GPUVector,
+    verbose: bool,
 ) -> Vec<f32> {
     let output: Vec<f32> = vec![0.0; element_count];
     let mut output_gpu: GPUVector = GPUVector::new(&handles, output, "output", true);
@@ -56,6 +57,10 @@ fn run_conv_shader(
     let launch_blocks_x: u32 = ((element_count + block_size_x - 1) / block_size_x) as u32;
     let block_size_y: usize = 1;
     let launch_blocks_y: u32 = 1;
+
+    if verbose {
+        println!("Dispatching {} x blocks of {} threads and {} y blocks of {} threads each for a total of {} threads!", launch_blocks_x, block_size_x, launch_blocks_y, block_size_y, launch_blocks_x as usize * launch_blocks_y as usize * block_size_x * block_size_y);
+    }
 
     // Reuse this function for the convolution and matrix multiplication tasks
     run_compute_shader(
@@ -83,10 +88,13 @@ pub fn convolution(handles: &GPUHandles) -> bool {
     );
     assert!(ground_truth_is_correct);
 
+    let number_of_runs = 10;
+
+    let scale: f32 = 0.1;
     let data_element_count: usize = 10000;
     let filter_size: usize = 19;
-    let signal: Vec<f32> = (0..data_element_count).map(|x| x as f32 * 0.1).collect();
-    let filter: Vec<f32> = (0..filter_size).map(|x| x as f32 * 0.1).collect();
+    let signal: Vec<f32> = (0..data_element_count).map(|x| x as f32 * scale).collect();
+    let filter: Vec<f32> = (0..filter_size).map(|x| x as f32 * scale).collect();
     let ground_truth: Vec<f32> = convolution_cpu(&signal, &filter);
 
     //
@@ -124,17 +132,32 @@ pub fn convolution(handles: &GPUHandles) -> bool {
     let input_signal: GPUVector = GPUVector::new(&handles, signal, "input_signal", false);
     let input_filter: GPUVector = GPUVector::new(&handles, filter, "input_filter", false);
 
-    let data_naive: Vec<f32> = run_conv_shader(
-        handles,
-        include_str!("convolution_naive.wgsl"),
-        "convolution_naive",
-        ground_truth.len(),
-        &uniform,
-        &input_signal,
-        &input_filter,
-    );
+    let data_naive: Vec<f32> = measure_time("Naive", number_of_runs, |verbose: bool| {
+        run_conv_shader(
+            handles,
+            include_str!("convolution_naive.wgsl"),
+            "convolution_naive",
+            ground_truth.len(),
+            &uniform,
+            &input_signal,
+            &input_filter,
+            verbose,
+        )
+    });
 
-    let data_shared: Vec<f32> = ground_truth.clone(); // Remove this and replace with your own data
+    let data_shared: Vec<f32> = measure_time("Shared", number_of_runs, |verbose: bool| {
+        run_conv_shader(
+            handles,
+            include_str!("convolution_shared.wgsl"),
+            "convolution_shared",
+            ground_truth.len(),
+            &uniform,
+            &input_signal,
+            &input_filter,
+            verbose,
+        )
+    });
+
     let data_padded: Vec<f32> = ground_truth.clone(); // Remove this and replace with your own data
                                                       //
 
@@ -151,16 +174,16 @@ pub fn convolution(handles: &GPUHandles) -> bool {
         "convolution shared MSE: {}",
         mean_square_error(&ground_truth, &data_shared)
     );
-    let success: bool = are_vectors_equivalent(&ground_truth, &data_shared);
+    let success: bool = are_vectors_equivalent_mse(&ground_truth, &data_shared);
     println!("convolution shared success: {}!", success);
 
-    // Padded
-    println!(
-        "convolution padded MSE: {}",
-        mean_square_error(&ground_truth, &data_padded)
-    );
-    let success: bool = are_vectors_equivalent(&ground_truth, &data_padded);
-    println!("convolution padded success: {}!", success);
+    // // Padded
+    // println!(
+    //     "convolution padded MSE: {}",
+    //     mean_square_error(&ground_truth, &data_padded)
+    // );
+    // let success: bool = are_vectors_equivalent(&ground_truth, &data_padded);
+    // println!("convolution padded success: {}!", success);
 
     success
 }

@@ -1,6 +1,11 @@
 use std::borrow::Cow;
+use std::time::{Duration, Instant};
 
-use wgpu::{Queue, Device, Adapter, AdapterInfo, Instance, RequestAdapterOptions, ShaderModule, ComputePipeline, BindGroupLayout, BindingResource, BindGroup, BindGroupEntry, CommandEncoder, ComputePass, Buffer, BufferSlice, BufferView, util::DeviceExt};
+use wgpu::{
+    util::DeviceExt, Adapter, AdapterInfo, BindGroup, BindGroupEntry, BindGroupLayout,
+    BindingResource, Buffer, BufferSlice, BufferView, CommandEncoder, ComputePass, ComputePipeline,
+    Device, Instance, Queue, RequestAdapterOptions, ShaderModule,
+};
 
 use crate::gpu_vector::GPUVector;
 
@@ -141,13 +146,13 @@ pub fn create_bind_group(
 }
 
 pub fn are_vectors_equivalent(a: &Vec<f32>, b: &Vec<f32>) -> bool {
-    let epsilon: f32 = 0.001;
+    let epsilon: f32 = 0.0001;
 
     for index in 0..a.len() {
-        if epsilon < (a[index] - b[index]).abs() {
+            if epsilon < (a[index] - b[index]).abs() {
             println!("Error at index {}: Values are {} - {}", index, a[index], b[index]);
             return false;
-        } 
+} 
     }
 
     true
@@ -192,15 +197,15 @@ impl Uniform {
         argument_0: usize,
         argument_1: usize,
         argument_2: usize,
-        argument_3: usize
+        argument_3: usize,
     ) -> Self {
         let elements: UniformElements = UniformElements {
             data: [
-                argument_0 as u32, 
-                argument_1 as u32, 
-                argument_2 as u32, 
-                argument_3 as u32
-                ],
+                argument_0 as u32,
+                argument_1 as u32,
+                argument_2 as u32,
+                argument_3 as u32,
+            ],
         };
 
         // The storage buffer to actually run our shader on.
@@ -216,32 +221,26 @@ impl Uniform {
                         | wgpu::BufferUsages::COPY_SRC,
                 });
 
-        Self {
-            storage_buffer,
-        }
+        Self { storage_buffer }
     }
 }
 
 pub fn run_compute_shader(
     handles: &GPUHandles,
-    block_size_x: usize, 
+    _block_size_x: usize,
     launch_blocks_x: u32,
-    block_size_y: usize,
-    launch_blocks_y: u32, 
-    shader_file: &'static str, 
+    _block_size_y: usize,
+    launch_blocks_y: u32,
+    shader_file: &'static str,
     shader_function: &str,
     uniform: &Uniform,
     input_a: &GPUVector,
     input_b: &GPUVector,
     output: &mut GPUVector,
 ) {
-    
     // Compile the shader allowing us to call specific
     // functions when dispatching our compute shader.
-    let cs_module: ShaderModule = create_shader_module(
-        &handles,
-        shader_file,
-    );
+    let cs_module: ShaderModule = create_shader_module(&handles, shader_file);
 
     // "main" is our entry point, as in the function that is
     // actually dispatched. That function can of course call
@@ -253,7 +252,7 @@ pub fn run_compute_shader(
     // some accompanying state like bindings
     // which the pipeline keeps track of.
     let compute_pipeline: ComputePipeline =
-    create_compute_pipeline(&handles, &cs_module, shader_function);
+        create_compute_pipeline(&handles, &cs_module, shader_function);
 
     // Instantiates the bind group, specifying the binding of buffers.
     // In this setup we can't just supply arbitrary buffers, they have to be bound
@@ -285,7 +284,7 @@ pub fn run_compute_shader(
         cpass.set_bind_group(0, &bind_group, &[]);
         cpass.insert_debug_marker("add_vectors");
         cpass.dispatch_workgroups(launch_blocks_x, launch_blocks_y, 1); // Number of cells to run, the (x,y,z) size of item being processed
-        println!("Dispatching {} x blocks of {} threads and {} y blocks of {} threads each for a total of {} threads!", launch_blocks_x, block_size_x, launch_blocks_y, block_size_y, launch_blocks_x as usize * launch_blocks_y as usize * block_size_x * block_size_y);
+        // println!("Dispatching {} x blocks of {} threads and {} y blocks of {} threads each for a total of {} threads!", launch_blocks_x, _block_size_x, launch_blocks_y, _block_size_y, launch_blocks_x as usize * launch_blocks_y as usize * _block_size_x * _block_size_y);
     }
 
     // Add the command to the encoder copying output back to CPU
@@ -321,4 +320,28 @@ pub fn run_compute_shader(
         } else {
             panic!("Failed to retrieve results from the gpu!")
         };
+}
+
+pub fn measure_time<F>(name: &str, n_runs: u32, f: F) -> Vec<f32>
+where
+    F: Fn(bool) -> Vec<f32>,
+{
+    // Warm-up run
+    let result = f(true);
+
+    // Actual runs
+    let mut total: Duration = Duration::new(0, 0);
+    for _ in 1..n_runs {
+        let start = Instant::now();
+        f(false);
+        total += start.elapsed();
+    }
+
+    println!(
+        "Average execution time of {} from {} runs took {:?}",
+        name,
+        n_runs,
+        total.div_f64(n_runs as f64)
+    );
+    result
 }
