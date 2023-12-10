@@ -1,7 +1,7 @@
 use crate::gpu_vector::GPUVector;
 use crate::utility::{
-    are_vectors_equivalent_mse_scale, mean_square_error, measure_time,
-    run_compute_shader, GPUHandles, Uniform,
+    are_vectors_equivalent_mse_scale, mean_square_error, measure_time, run_compute_shader,
+    GPUHandles, Uniform,
 };
 
 fn matrix_multiplication_cpu(
@@ -23,6 +23,46 @@ fn matrix_multiplication_cpu(
         }
     }
     output
+}
+
+fn run_matmul_shader_tiled(
+    handles: &GPUHandles,
+    shader: &'static str,
+    shader_func: &str,
+    m: usize,
+    n: usize,
+    tiled_size:usize,
+    uniform: &Uniform,
+    mat1: &GPUVector,
+    mat2: &GPUVector,
+    verbose: bool,
+) -> Vec<f32> {
+    let output: Vec<f32> = vec![0.0; m * n];
+    let mut output_gpu: GPUVector = GPUVector::new(&handles, output, "output", true);
+
+    let block_size: usize = tiled_size;
+    let launch_blocks_x: u32 = ((m + block_size - 1) / block_size) as u32;
+    let launch_blocks_y: u32 = ((n + block_size - 1) / block_size) as u32;
+
+    if verbose {
+        println!("Dispatching {} x blocks of {} threads and {} y blocks of {} threads each for a total of {} threads!", launch_blocks_x, block_size, launch_blocks_y, block_size, launch_blocks_x as usize * launch_blocks_y as usize * block_size * block_size);
+    }
+
+    // Reuse this function for the convolution and matrix multiplication tasks
+    run_compute_shader(
+        handles,
+        block_size,
+        launch_blocks_x,
+        block_size,
+        launch_blocks_y,
+        shader,
+        shader_func,
+        &uniform,
+        &mat1,
+        &mat2,
+        &mut output_gpu,
+    );
+    return output_gpu.cpu_data;
 }
 
 fn run_matmul_shader(
@@ -101,12 +141,13 @@ pub fn matrix_multiplication(handles: &GPUHandles) -> bool {
     );
     assert!(ground_truth_is_correct);
     let number_of_runs = 10;
+    let tiled_size = 8;
 
     // Use big data dimensions to make sure the cost of transferring
     // doesn't dominate the time spent in the function.
-    let outer_dimension_left: usize = 400; // M
-    let inner_dimension: usize = 320; // N
-    let outer_dimension_right: usize = 500; // K
+    let outer_dimension_left: usize = 32; // M
+    let inner_dimension: usize = 32; // N
+    let outer_dimension_right: usize = 32; // K
     let scale = 0.01;
     let left_matrix: Vec<f32> = (0..outer_dimension_left * inner_dimension)
         .map(|x| x as f32 * scale)
@@ -152,7 +193,7 @@ pub fn matrix_multiplication(handles: &GPUHandles) -> bool {
         outer_dimension_left,
         inner_dimension,
         outer_dimension_right,
-        0,
+        tiled_size,
     );
 
     // Input data
@@ -174,10 +215,22 @@ pub fn matrix_multiplication(handles: &GPUHandles) -> bool {
             verbose,
         )
     });
+    let data_tiled: Vec<f32> = measure_time("Tiled", number_of_runs, |verbose: bool| {
+        run_matmul_shader_tiled(
+            handles,
+            include_str!("matrix_multiplication_tiled.wgsl"),
+            "matmul_tiled",
+            outer_dimension_left,
+            outer_dimension_right,
+            tiled_size,
+            &uniform,
+            &mat1,
+            &mat2,
+            verbose,
+        )
+    });
 
-    // let data_tiled: Vec<f32> = ground_truth.clone(); // Remove this and replace with your own data
     // let data_padded: Vec<f32> = ground_truth.clone(); // Remove this and replace with your own data
-    //                                                   //
 
     // Naive
     println!(
@@ -191,13 +244,17 @@ pub fn matrix_multiplication(handles: &GPUHandles) -> bool {
     );
     println!("matrix multiplication naive success: {}!", success);
 
-    // // Tiled
-    // println!(
-    //     "matrix multiplication tiled MSE: {}",
-    //     mean_square_error(&ground_truth, &data_tiled)
-    // );
-    // let success: bool = are_vectors_equivalent(&ground_truth, &data_tiled);
-    // println!("matrix multiplication tiled success: {}!", success);
+    // Tiled
+    println!(
+        "matrix multiplication tiled MSE: {}",
+        mean_square_error(&ground_truth, &data_tiled)
+    );
+    let success: bool = are_vectors_equivalent_mse_scale(
+        &ground_truth,
+        &data_tiled,
+        (inner_dimension * inner_dimension) as f64,
+    );
+    println!("matrix multiplication tiled success: {}!", success);
 
     // // Padded
     // println!(
