@@ -1,7 +1,7 @@
 use crate::gpu_vector::GPUVector;
 use crate::utility::{
     are_vectors_equivalent_mse_scale, mean_square_error, measure_time, run_compute_shader,
-    GPUHandles, Uniform,
+    GPUHandles, Uniform, compare_vectors,
 };
 
 fn matrix_multiplication_cpu(
@@ -148,7 +148,7 @@ pub fn matrix_multiplication(handles: &GPUHandles) -> bool {
     let outer_dimension_left: usize = 32; // M
     let inner_dimension: usize = 32; // N
     let outer_dimension_right: usize = 32; // K
-    let scale = 0.01;
+    let scale = 0.1;
     let left_matrix: Vec<f32> = (0..outer_dimension_left * inner_dimension)
         .map(|x| x as f32 * scale)
         .collect();
@@ -249,10 +249,9 @@ pub fn matrix_multiplication(handles: &GPUHandles) -> bool {
         "matrix multiplication tiled MSE: {}",
         mean_square_error(&ground_truth, &data_tiled)
     );
-    let success: bool = are_vectors_equivalent_mse_scale(
+    let success: bool = compare_vectors(
         &ground_truth,
-        &data_tiled,
-        (inner_dimension * inner_dimension) as f64,
+        &data_tiled
     );
     println!("matrix multiplication tiled success: {}!", success);
 

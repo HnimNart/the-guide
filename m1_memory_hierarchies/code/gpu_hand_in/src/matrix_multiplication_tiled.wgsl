@@ -28,7 +28,6 @@ var<workgroup> Nds : array<f32, BLOCK_SIZE_2D>;
 @compute @workgroup_size(8u, 8u, 1u)
 
 fn matmul_tiled(
-    @builtin(global_invocation_id) global_id: vec3<u32>,
     @builtin(local_invocation_id) local_id: vec3<u32>,
     @builtin(workgroup_id) workgroup_id: vec3<u32>,
 ) {
@@ -48,7 +47,7 @@ fn matmul_tiled(
     var value = 0.0;
     for (var m = 0u; m < u32(p / block_size); m++) {
         Mds[local_id.y * block_size + local_id.x] = mat1[i * n + (m * block_size + local_id.x)];
-        Nds[local_id.y * block_size + local_id.x] = mat2[(m * block_size + local_id.y) * block_size + j];
+        Nds[local_id.y * block_size + local_id.x] = mat2[(m * block_size + local_id.y) * p + j];
         workgroupBarrier();
 
         for (var k = 0u; k < block_size; k++) {
